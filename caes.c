@@ -4,20 +4,20 @@
 
 int main()
 {
-    char instr[100], crypt[100], decrypt[100];
+    char input[100], crypt[100], decrypt[100];
     int shift, k;
 
-    printf("\nEnter your string: ");
-    fgets(instr, sizeof(instr), stdin);
+    printf("\nEnter your string\n");
+    fgets(input, sizeof(input), stdin);
 
-    printf("\nEnter the shift value: ");
+    printf("\nOriginal string is: %s", input);
+
+    printf("\nEnter shift: ");
     scanf("%d", &shift);
 
-    printf("\nOriginal string is: %s", instr);
-
-    for (k = 0; instr[k] != '\0'; k++)
+    for (k = 0; input[k] != '\0'; k++)
     {
-        char aa = tolower(instr[k]);
+        char aa = tolower(input[k]);
 
         if (aa >= 'a' && aa <= 'z')
         {
