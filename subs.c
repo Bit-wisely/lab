@@ -8,7 +8,7 @@ void encrypt()
     char message[100];
 
     printf("Enter the message: ");
-    scanf("%s", message);
+    scanf(" %[^\n]", message);
 
     for (int i = 0; message[i] != '\0'; i++)
     {
@@ -30,7 +30,7 @@ void decrypt()
     char message[100];
 
     printf("Enter Cipher text: ");
-    scanf("%s", message);
+    scanf(" %[^\n]", message);
 
     for (int i = 0; message[i] != '\0'; i++)
     {
@@ -45,4 +45,40 @@ void decrypt()
     }
 
     printf("Decrypted message: %s\n", message);
+}
+
+int main()
+{
+    int choice;
+
+    do
+    {
+        printf("1. Encrypt\n");
+        printf("2. Decrypt\n");
+        printf("3. Exit\n");
+
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                encrypt();
+                break;
+
+            case 2:
+                decrypt();
+                break;
+
+            case 3:
+                break;
+
+            default:
+                printf("Invalid choice\n");
+                break;
+        }
+
+    } while (choice != 3);
+
+    return 0;
 }
