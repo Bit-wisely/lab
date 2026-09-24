@@ -5,32 +5,25 @@ int main()
 {
     int key[2][2], inverse[2][2];
     char plaintext[100], ciphertext[100], decrypted[100];
-    int i, len;
+    int i, j, len;
 
-    // Enter Key Matrix
-    printf("Enter 2x2 Key Matrix:\n");
+    printf("Enter 2x2 key matrix");
 
     for (i = 0; i < 2; i++)
     {
-        for (int j = 0; j < 2; j++)
-        {
+        for (j = 0; j < 2; j++)
             scanf("%d", &key[i][j]);
-        }
     }
 
-    // Enter Inverse Key Matrix
-    printf("Enter Inverse Key Matrix:\n");
+    printf("Enter inverse key matrix");
 
     for (i = 0; i < 2; i++)
     {
-        for (int j = 0; j < 2; j++)
-        {
+        for (j = 0; j < 2; j++)
             scanf("%d", &inverse[i][j]);
-        }
     }
 
-    // Enter plaintext
-    printf("Enter plaintext (UPPERCASE, even length): ");
+    printf("Enter plaintext (uppercase, even length): ");
     scanf("%s", plaintext);
 
     len = strlen(plaintext);
@@ -50,7 +43,7 @@ int main()
 
     ciphertext[len] = '\0';
 
-    printf("Ciphertext: %s\n", ciphertext);
+    printf("\nCiphertext: %s\n", ciphertext);
 
     // Decryption
     for (i = 0; i < len; i += 2)
