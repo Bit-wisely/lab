@@ -1,22 +1,22 @@
-#include <stdio.h>
-#include <string.h>
+int main()
+{
+    int i;
+    char message[] = "Hello World";
+    int key = 5;
 
-int main() {
-    char str[] = "HelloWorld";
-    char key = 'K';
-    int len = strlen(str);
-
-    printf("Original: %s\n", str);
-
-    for (int i = 0; i < len; i++) {
-        str[i] = str[i] ^ key;
+    for(i = 0; message[i] != '\0'; i++)
+    {
+        message[i] = message[i] ^ key;
     }
-    printf("Encrypted: %s\n", str);
 
-    for (int i = 0; i < len; i++) {
-        str[i] = str[i] ^ key;
+    printf("XOR: %s\n", message);
+
+    for(i = 0; message[i] != '\0'; i++)
+    {
+        message[i] = message[i] ^ key;
     }
-    printf("Decrypted: %s\n", str);
+
+    printf("Original: %s\n", message);
 
     return 0;
 }
