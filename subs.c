@@ -1,50 +1,51 @@
-#include <stdio.h>
+#include<stdio.h>
 
 char alphabet[26] = "abcdefghijklmnopqrstuvwxyz";
+
 char substitution[26] = "zyxwvutsrqponmlkjihgfedcba";
 
 void encrypt()
 {
-    char message[100];
+    char plaintext[100];
 
     printf("Enter the message: ");
-    scanf(" %[^\n]", message);
+    scanf("%s", plaintext);
 
-    for (int i = 0; message[i] != '\0'; i++)
+    for(int i = 0; plaintext[i] != '\0'; i++)
     {
-        for (int j = 0; j < 26; j++)
+        for(int j = 0; j < 26; j++)
         {
-            if (message[i] == alphabet[j])
+            if(plaintext[i] == alphabet[j])
             {
-                message[i] = substitution[j];
+                plaintext[i] = substitution[j];
                 break;
             }
         }
     }
 
-    printf("Encrypted message: %s\n", message);
+    printf("Encrypted message: %s\n", plaintext);
 }
 
 void decrypt()
 {
-    char message[100];
+    char ciphertext[100];
 
     printf("Enter Cipher text: ");
-    scanf(" %[^\n]", message);
+    scanf("%s", ciphertext);
 
-    for (int i = 0; message[i] != '\0'; i++)
+    for(int i = 0; ciphertext[i] != '\0'; i++)
     {
-        for (int j = 0; j < 26; j++)
+        for(int j = 0; j < 26; j++)
         {
-            if (message[i] == substitution[j])
+            if(ciphertext[i] == substitution[j])
             {
-                message[i] = alphabet[j];
+                ciphertext[i] = alphabet[j];
                 break;
             }
         }
     }
 
-    printf("Decrypted message: %s\n", message);
+    printf("Decrypted message: %s\n", ciphertext);
 }
 
 int main()
@@ -53,14 +54,11 @@ int main()
 
     do
     {
-        printf("1. Encrypt\n");
-        printf("2. Decrypt\n");
-        printf("3. Exit\n");
-
+        printf("\n 1. ENCRYPT 2. DECRYPT 3. EXIT\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
-        switch (choice)
+        switch(choice)
         {
             case 1:
                 encrypt();
@@ -71,14 +69,15 @@ int main()
                 break;
 
             case 3:
+                printf("exiting\n");
                 break;
 
             default:
-                printf("Invalid choice\n");
+                printf("Invalid choise\n");
                 break;
         }
 
-    } while (choice != 3);
+    }while(choice != 3);
 
     return 0;
 }

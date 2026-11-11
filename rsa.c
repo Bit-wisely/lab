@@ -1,126 +1,33 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 
-int gcd(int a, int b)
-{
-    if (b == 0)
-        return a;
-
-    return gcd(b, a % b);
+long long power(long long base, long long exp, long long mod) {
+    long long res = 1;
+    base = base % mod;
+    while (exp > 0) {
+        if (exp % 2 == 1) res = (res * base) % mod;
+        base = (base * base) % mod;
+        exp /= 2;
+    }
+    return res;
 }
 
-int isPrime(int n)
-{
-    int i;
+int main() {
+    int p = 13, q = 11;
+    int n = p * q;
+    int phi = (p - 1) * (q - 1);
+    int e = 7;
+    int d = 103;
 
-    if (n <= 1)
-        return 0;
+    long long msg = 9;
+    long long c = power(msg, e, n);
+    long long m = power(c, d, n);
 
-    for (i = 2; i * i <= n; i++)
-    {
-        if (n % i == 0)
-            return 0;
-    }
-
-    return 1;
-}
-
-int generatePrime()
-{
-    int num;
-
-    do
-    {
-        num = rand() % 100 + 2;
-    }
-    while (!isPrime(num));
-
-    return num;
-}
-
-int calculateE(int phi)
-{
-    int e = 2;
-
-    while (e < phi)
-    {
-        if (gcd(e, phi) == 1)
-            break;
-
-        e++;
-    }
-
-    return e;
-}
-
-int calculateD(int e, int phi)
-{
-    int d = 1;
-
-    while ((d * e) % phi != 1)
-    {
-        d++;
-    }
-
-    return d;
-}
-
-int encrypt(int plaintext, int e, int n)
-{
-    int cipher = 1;
-
-    for (int i = 0; i < e; i++)
-    {
-        cipher = (cipher * plaintext) % n;
-    }
-
-    return cipher;
-}
-
-int decrypt(int ciphertext, int d, int n)
-{
-    int plaintext = 1;
-
-    for (int i = 0; i < d; i++)
-    {
-        plaintext = (plaintext * ciphertext) % n;
-    }
-
-    return plaintext;
-}
-
-int main()
-{
-    int p, q, n, phi, e, d;
-    int plaintext = 88;
-    int ciphertext, decryptedText;
-
-    srand(time(NULL));
-
-    p = generatePrime();
-
-    do
-    {
-        q = generatePrime();
-    }
-    while (q == p);
-
-    n = p * q;
-
-    phi = (p - 1) * (q - 1);
-
-    e = calculateE(phi);
-
-    d = calculateD(e, phi);
-
-    ciphertext = encrypt(plaintext, e, n);
-
-    decryptedText = decrypt(ciphertext, d, n);
-
-    printf("Plaintext: %d\n", plaintext);
-    printf("Ciphertext: %d\n", ciphertext);
-    printf("Decrypted text: %d\n", decryptedText);
+    printf("p = %d, q = %d\n", p, q);
+    printf("Public Key (e, n): (%d, %d)\n", e, n);
+    printf("Private Key (d, n): (%d, %d)\n", d, n);
+    printf("Original message: %lld\n", msg);
+    printf("Encrypted message: %lld\n", c);
+    printf("Decrypted message: %lld\n", m);
 
     return 0;
 }

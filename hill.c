@@ -1,66 +1,60 @@
 #include <stdio.h>
 #include <string.h>
 
-int main()
+void main()
 {
-    int key[2][2], inverse[2][2];
-    char plaintext[100], ciphertext[100], decrypted[100];
-    int i, j, len;
+    unsigned int a[3][3] = {{6,24,1}, {13,16,10}, {20,17,15}};
+    unsigned int b[3][3] = {{8,5,10}, {21,8,21}, {21,12,8}};
+    unsigned int c[20], d[20];
 
-    printf("Enter 2x2 key matrix");
+    int i, j, t = 0;
+    char msg[20] = "SAN";
 
-    for (i = 0; i < 2; i++)
+    printf("\nPlain text : %s", msg);
+
+    printf("\nNumerical value of plain text is:");
+
+    for (i = 0; i < 3; i++)
     {
-        for (j = 0; j < 2; j++)
-            scanf("%d", &key[i][j]);
+        c[i] = msg[i] - 65;
+        printf("%d ", c[i]);
     }
 
-    printf("Enter inverse key matrix");
-
-    for (i = 0; i < 2; i++)
+    for (i = 0; i < 3; i++)
     {
-        for (j = 0; j < 2; j++)
-            scanf("%d", &inverse[i][j]);
+        t = 0;
+
+        for (j = 0; j < 3; j++)
+        {
+            t = t + (a[i][j] * c[j]);
+        }
+
+        d[i] = t % 26;
     }
 
-    printf("Enter plaintext (uppercase, even length): ");
-    scanf("%s", plaintext);
+    printf("\nEncrypted text :");
 
-    len = strlen(plaintext);
-
-    // Encryption
-    for (i = 0; i < len; i += 2)
+    for (i = 0; i < 3; i++)
     {
-        int p1 = plaintext[i] - 'A';
-        int p2 = plaintext[i + 1] - 'A';
-
-        ciphertext[i] =
-            ((key[0][0] * p1 + key[0][1] * p2) % 26) + 'A';
-
-        ciphertext[i + 1] =
-            ((key[1][0] * p1 + key[1][1] * p2) % 26) + 'A';
+        printf("%c", d[i] + 65);
     }
 
-    ciphertext[len] = '\0';
-
-    printf("\nCiphertext: %s\n", ciphertext);
-
-    // Decryption
-    for (i = 0; i < len; i += 2)
+    for (i = 0; i < 3; i++)
     {
-        int c1 = ciphertext[i] - 'A';
-        int c2 = ciphertext[i + 1] - 'A';
+        t = 0;
 
-        decrypted[i] =
-            ((inverse[0][0] * c1 + inverse[0][1] * c2) % 26) + 'A';
+        for (j = 0; j < 3; j++)
+        {
+            t = t + (b[i][j] * d[j]);
+        }
 
-        decrypted[i + 1] =
-            ((inverse[1][0] * c1 + inverse[1][1] * c2) % 26) + 'A';
+        c[i] = t % 26;
     }
 
-    decrypted[len] = '\0';
+    printf("\nDecrypted text :");
 
-    printf("Decrypted text: %s\n", decrypted);
-
-    return 0;
+    for (i = 0; i < 3; i++)
+    {
+        printf("%c", c[i] + 65);
+    }
 }

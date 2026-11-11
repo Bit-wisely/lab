@@ -2,38 +2,38 @@
 #include <ctype.h>
 #include <string.h>
 
-int main()
+void main()
 {
-    char input[100], crypt[100], decrypt[100];
+    char instr[100], encrypt[100], decrypt[100];
     int shift, k;
 
-    printf("\nEnter your string\n");
-    fgets(input, sizeof(input), stdin);
+    printf("Enter your string: ");
+    fgets(instr, sizeof(instr), stdin);
 
-    printf("\nOriginal string is: %s", input);
-
-    printf("\nEnter shift: ");
+    printf("Enter your key: ");
     scanf("%d", &shift);
 
-    for (k = 0; input[k] != '\0'; k++)
+    printf("\nOriginal string is: %s", instr);
+
+    for (k = 0; instr[k] != '\0'; k++)
     {
-        char aa = tolower(input[k]);
+        char aa = tolower(instr[k]);
 
         if (aa >= 'a' && aa <= 'z')
         {
             aa = ((aa - 'a' + shift) % 26) + 'a';
         }
 
-        crypt[k] = aa;
+        encrypt[k] = aa;
     }
 
-    crypt[k] = '\0';
+    encrypt[k] = '\0';
 
-    printf("\nEncrypted string is: %s", crypt);
+    printf("\nEncrypted string is: %s", encrypt);
 
-    for (k = 0; crypt[k] != '\0'; k++)
+    for (k = 0; encrypt[k] != '\0'; k++)
     {
-        char aa = crypt[k];
+        char aa = encrypt[k];
 
         if (aa >= 'a' && aa <= 'z')
         {
@@ -46,6 +46,4 @@ int main()
     decrypt[k] = '\0';
 
     printf("\nDecrypted string is: %s", decrypt);
-
-    return 0;
 }
